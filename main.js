@@ -18,7 +18,23 @@ function setup() {
 
 function draw() {
     clearCanvas();
+    updateCircles();
+}
 
+function clearCanvas() {
+    context.clearRect(0, 0, innerWidth, innerHeight);
+}
+
+function createCircles() {
+    for (let i = 0; i < 50; i++) {
+        baseCircles.push(new Circle(generateRandValues()));
+        bounceCircles.push(new BounceCircle(generateRandValues()));
+        rainbowCircles.push(new RainbowCircle(generateRandValues()));
+        breathingCircles.push(new BreathingCircle(generateRandValues()));
+    }
+}
+
+function updateCircles() {
     for (let circle of [
         ...baseCircles,
         ...bounceCircles,
@@ -39,25 +55,12 @@ function draw() {
     }
 }
 
-function clearCanvas() {
-    context.clearRect(0, 0, innerWidth, innerHeight);
-}
-
-function createCircles() {
-    for (let i = 0; i < 50; i++) {
-        baseCircles.push(new Circle(generateRandValues()));
-        bounceCircles.push(new BounceCircle(generateRandValues()));
-        rainbowCircles.push(new RainbowCircle(generateRandValues()));
-        breathingCircles.push(new BreathingCircle(generateRandValues()));
-    }
-}
-
 function generateRandValues() {
     let x = randBetween(0, innerWidth);
     let y = randBetween(0, innerHeight);
     let r = randBetween(5, 50);
-    let xSpeed = randBetween(0, 10);
-    let ySpeed = randBetween(0, 10);
+    let xSpeed = randBetween(-10, 10);
+    let ySpeed = randBetween(-10, 10);
     let rMin = randBetween(5, r);
     let rMax = randBetween(r, 100);
     let rSpeed = randBetween(0, 5);
